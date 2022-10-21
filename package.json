@@ -1,7 +1,28 @@
 {
-  "name": "my-storybook",
+  "name": "frp-my-storybook-components",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "homepage": "https://feliperuiz.info",
+  "repository": {
+    "url": "https://github.com/FelipeRP94/sb-components",
+    "type": "git"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "typescript": ">=4.0.0"
+  },
+  "release": {
+    "branches": [
+      "master"
+    ]
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -17,8 +38,10 @@
   },
   "scripts": {
     "start": "start-storybook -p 6006",
-    "build": "build-storybook",
-    "chromatic": "npx chromatic --project-token=f26a591b817e"
+    "build": "npm run clean && tsc && npm run copy-files",
+    "chromatic": "npx chromatic --project-token=f26a591b817e",
+    "clean": "rimraf dist/",
+    "copy-files": "copyfiles -u 1 src/**/*.css dist/"
   },
   "eslintConfig": {
     "extends": [
@@ -49,8 +72,19 @@
     "@storybook/react": "^6.5.12",
     "@storybook/testing-library": "0.0.13",
     "babel-loader": "^8.2.5",
-    "chromatic": "^6.10.4"
+    "chromatic": "^6.10.4",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "semantic-release": "^19.0.5"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "my-storybook@0.1.0"
+  "_id": "my-storybook@0.1.0",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ]
 }
